@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Word Scramble</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./styles/style.css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js"/>
+</head>
+<body>
+    <div class="header">
+        <div class="logo" onclick="getWord()">
+            <h2>🔄 Word Scramble</h2>
+        </div>
+        <div class="category-selector">
+            <div class="dropdown">
+                <div class="select">
+                    <span class="selected">
+                        Four letters
+                    </span>
+                </div>
+                <ul class="menu">
+                    <li>Four letters</li>
+                    <li>Five letters</li>
+                    <li>Six letters</li>
+                    <li>Seven letters</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="content-wrapper">
+        <div class="content">
+            <h5 class="part-of-speech" id="partOfSpeech"></h5>
+            <div class="spinner"></div>
+            <div class="letters-wrapper">
+                <ul class="draggable-list" id="draggable-list"></ul>
+            </div>
+            <div class="hint" id="hint">
+                <ul id="definition-list"></ul>
+                <button id="add_def_btn">Show more</button>
+            </div>
+            <div class="actions">
+                <button id="play_btn">🎧 listen to the pronunciation</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <span>👋 </span>
+        <a href="https://github.com/sonyafar" target="_blank">@sonya</a>
+        <a href="#" id="popup-btn" style="margin-left: 10px;">about</a>
+    </div>
+    <div id="popup" class="overlay">
+        <div class="popup">
+            <h2>About</h2>
+            <a class="close" id="close-btn">&times;</a>
+            <div class="content">
+                <p>
+                    <a href="#">Word Scramble</a> is a Scramble-like free game, with many exciting twists and turns! 
+                </p>
+                <p style="padding-top: 10px;">
+                    Check the definition, listen to the pronunciation and touch the letters to make the word.
+                </p>
+                <p style="padding-top: 20px;">🔤😵‍💫🔄✅</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="examples-popup" class="overlay">
+        <div class="popup">
+            <h2>About</h2>
+            <a class="close" id="close-btn">&times;</a>
+            <div class="content">
+                <p> Researchers in Japan and Norway have conducted studies that suggest laughter may lead to living a longer life. 
+                </p>
+                <p style="padding-top: 20px;">
+                    <a ref="/">Fun&Jokes</a> gives you the opportunity to become a longevity. Choose a category, choose a joke, and share it with your favorite friend. Become long-livers together!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="./src/app.js"></script>
+</body>
+</html>
