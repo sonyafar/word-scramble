@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="header">
-        <div class="logo" onclick="getWord()">
+        <div class="logo" onclick="isLettersChanged=false;getWord()">
             <h2>🔄 Word Scramble</h2>
         </div>
         <div class="category-selector">
@@ -31,15 +31,20 @@
         </div>
     </div>
     <div class="content-wrapper">
-        <div class="content">
-            <h5 class="part-of-speech" id="partOfSpeech"></h5>
-            <div class="spinner"></div>
-            <div class="letters-wrapper">
-                <ul class="draggable-list" id="draggable-list"></ul>
-            </div>
-            <div class="hint" id="hint">
-                <ul id="definition-list"></ul>
-                <button id="add_def_btn">Show more</button>
+        <div id="spinner">
+            <div class="lds-hourglass"></div>
+        </div>
+        <div class="content" id="content">
+            <div class="main-content">
+                <h5 class="part-of-speech" id="partOfSpeech"></h5>
+                <div class="spinner"></div>
+                <div class="letters-wrapper">
+                    <ul class="draggable-list" id="draggable-list"></ul>
+                </div>
+                <div class="hint" id="hint">
+                    <ul id="definition-list"></ul>
+                    <button id="add_def_btn">Show more</button>
+                </div>
             </div>
             <div class="actions">
                 <button id="play_btn">🎧 listen to the pronunciation</button>

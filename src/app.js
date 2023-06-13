@@ -17,6 +17,8 @@ const definition_list = document.getElementById('definition-list');
 const draggable_list = document.getElementById('draggable-list');
 let letters_list = [];
 
+const content = document.getElementById('content');
+const spinner = document.getElementById('spinner');
 
 let category = 'Four letters';
 let letterCount = 4;
@@ -29,23 +31,28 @@ let listItems = [];
 
 let dragStartIndex;
 
+let isLettersChanged = false;
+
 addAllEventListeners();
 
 getWord();
 
-document.onload = createDraggableLettersList();
-
+createDraggableLettersList();
 
 function getWord() {
+    if(!content.classList.contains('show')) content.classList.remove('show');
+    spinner.classList.add('show');
     document.querySelectorAll('.draggable-list li').forEach(item => {
         item.classList.remove('wrong');
         item.classList.remove('right');
-    })
+    });
+
+
     getRandomWord();
 }
 
 async function getRandomWord() {
-    const res = await fetch(`https://random-word-api.vercel.app/api?words=1&length=${letterCount}`, 
+    const res = await fetch(`https://random-word-api.herokuapp.com/word?length=${letterCount}`, 
     {
         headers: {
             accept: 'application/json'
@@ -56,9 +63,9 @@ async function getRandomWord() {
 
     letters_list = [];
 
-    extractLetters();  
-
     fetchWordInfo();
+
+    extractLetters();  
 }
 
 async function fetchWordInfo() {
@@ -100,6 +107,7 @@ async function fetchWordInfo() {
 // Function create draggable list 
 function createDraggableLettersList() {
     listItems = [];
+
     for(let i = 0; i < letterCount; i++) {
         const listItem = document.createElement('li');
         listItem.setAttribute('data-index', i);
@@ -121,7 +129,8 @@ function extractLetters() {
         .map(obj => ({value: obj, sort: Math.random()}))
         .sort((a, b) => a.sort - b.sort)
         .map(obj => obj.value);
-
+        
+    if(isLettersChanged)  createDraggableLettersList();
     changeLettersList();
 }
 
@@ -132,6 +141,9 @@ function changeLettersList() {
         document.querySelectorAll('.draggable')[index].innerText = letter;
     });
 
+    content.classList.add('show');
+
+    setTimeout(() => spinner.classList.remove('show'), 0.3)
     addDragDropListeners();
 }
 
@@ -250,6 +262,7 @@ function playAudio() {
 }
 
 async function changeLettersCount() {
+    isLettersChanged = true;
     draggable_list.innerHTML = '';
     switch(category) {
         case "Four letters": {
@@ -270,7 +283,7 @@ async function changeLettersCount() {
         }
     }
 
-    createDraggableLettersList();
+    // createDraggableLettersList();
 }
 
 
@@ -297,6 +310,7 @@ function addAllEventListeners() {
 
     options.forEach(option => {
         option.addEventListener('click', () => {
+            content.classList.remove('show');
             selected.innerText = option.innerText;
             category = selected.innerText;
             changeLettersCount();
